@@ -1,0 +1,1 @@
+ALTER TABLE "binary_object" ADD COLUMN "storage_account_name" varchar(150);

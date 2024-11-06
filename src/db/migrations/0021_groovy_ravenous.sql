@@ -1,0 +1,1 @@
+ALTER TABLE "binary_object" ALTER COLUMN "blob_url" SET NOT NULL;

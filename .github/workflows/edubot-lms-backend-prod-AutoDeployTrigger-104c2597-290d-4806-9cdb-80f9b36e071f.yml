@@ -1,0 +1,47 @@
+name: Trigger auto deployment for edubot-lms-backend-prod
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/edubot-lms-backend-prod-AutoDeployTrigger-104c2597-290d-4806-9cdb-80f9b36e071f.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.EDUBOTLMSBACKENDPROD_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.EDUBOTLMSBACKENDPROD_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.EDUBOTLMSBACKENDPROD_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: edubotlms.azurecr.io
+          registryUsername: ${{ secrets.EDUBOTLMSBACKENDPROD_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.EDUBOTLMSBACKENDPROD_REGISTRY_PASSWORD }}
+          containerAppName: edubot-lms-backend-prod
+          resourceGroup: edubot-prod
+          imageToBuild: edubotlms.azurecr.io/edubot-lms-backend-prod:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+

@@ -1,0 +1,1 @@
+ALTER TABLE "binary_object" ALTER COLUMN "storage_account_name" SET NOT NULL;

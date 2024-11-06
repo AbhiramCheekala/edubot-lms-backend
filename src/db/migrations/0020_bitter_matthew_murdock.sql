@@ -1,0 +1,1 @@
+ALTER TABLE "binary_object" ADD COLUMN "blob_url" text;

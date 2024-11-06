@@ -1,0 +1,3 @@
+import {} from './createSampleData.js';
+
+(async () => {})();

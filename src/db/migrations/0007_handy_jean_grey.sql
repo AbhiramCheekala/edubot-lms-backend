@@ -1,0 +1,1 @@
+ALTER TABLE "grade" ADD CONSTRAINT "grade_submission_id_unique" UNIQUE("submission_id");

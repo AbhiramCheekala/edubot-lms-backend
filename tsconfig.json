@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "outDir": "./dist",
+    "module": "Node16",
+    "types": ["node"],
+    "resolveJsonModule": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "moduleResolution": "Node16",
+    "paths": {
+      "*": ["src/*"]
+    }
+    // "noErrorTruncation": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*", "dist", "src/testdbquery.ts", "SampleData/customSeedScript.ts"]
+}

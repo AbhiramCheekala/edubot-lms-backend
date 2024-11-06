@@ -1,0 +1,1 @@
+ALTER TABLE "organization" ALTER COLUMN "github_org_uri" SET NOT NULL;
